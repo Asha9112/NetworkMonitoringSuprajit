@@ -41,8 +41,7 @@ async function renderTable() {
 
     if (ipData.length === 0) {
         const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="3" style="text-align:center;">No IP addresses stored.</td>`;
-
+        row.innerHTML = <td colspan="3" style="text-align:center;">No IP addresses stored.</td>;
         ipTableBody.appendChild(row);
     } else {
         ipData.forEach((item) => {

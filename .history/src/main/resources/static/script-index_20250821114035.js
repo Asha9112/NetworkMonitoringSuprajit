@@ -41,8 +41,7 @@ async function renderTable() {
 
     if (ipData.length === 0) {
         const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="3" style="text-align:center;">No IP addresses stored.</td>`;
-
+        row.innerHTML = <td colspan="3" style="text-align:center;">No IP addresses stored.</td>;
         ipTableBody.appendChild(row);
     } else {
         ipData.forEach((item) => {
@@ -62,8 +61,7 @@ async function renderTable() {
 async function deleteIp(id) {
     const confirmDelete = confirm("Are you sure you want to delete this IP?");
     if (!confirmDelete) return;
-    const response = await fetchWithAuth(`/api/ip/${id}`, { method: 'DELETE' });
-
+    const response = await fetch(`/api/ip/${id}`, { method: 'DELETE' });
     if (response.ok) {
         renderTable();
     } else {
@@ -79,11 +77,11 @@ ipForm.addEventListener("submit", async (e) => {
     const formData = new URLSearchParams();
     formData.append("location", location);
     formData.append("ip", ip);
-    const response = await fetchWithAuth('/api/ip', {
-  method: 'POST',
-  body: formData.toString()
-});
-
+    const response = await fetch('/api/ip', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString()
+    });
     if (response.ok) {
         ipForm.reset();
         renderTable();
