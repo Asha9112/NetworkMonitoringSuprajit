@@ -26,7 +26,7 @@ body {
 }
 
 .suprajit-logo {
-    height: 60px;
+    height: 100px;
     width: auto;
     display: block;
 }
@@ -253,20 +253,6 @@ th {
 .delete-btn:hover {
     background-color: #5a2e9d;
 }
-.edit-btn, .save-btn, .cancel-btn {
-  margin-right: 5px;
-  background-color: #ef6724;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-}
-.edit-btn:hover, .save-btn:hover, .cancel-btn:hover {
-  background-color: #bd2331;
-}
-
 
 /* --- RESPONSIVE DESIGN --- */
 @media (max-width: 900px) {

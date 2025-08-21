@@ -1,10 +1,8 @@
 package com.ipmonitoring.ipmonitoringapp.controller;
 
 import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import com.ipmonitoring.ipmonitoringapp.model.IpAddress;
 import com.ipmonitoring.ipmonitoringapp.repository.IpAddressRepository;
 
@@ -12,30 +10,25 @@ import com.ipmonitoring.ipmonitoringapp.repository.IpAddressRepository;
 @RestController
 @RequestMapping("/api/ip")
 public class IpAddressController {
-
     private final IpAddressRepository repo;
 
     public IpAddressController(IpAddressRepository repo) {
         this.repo = repo;
     }
 
-    // Get all IP addresses
     @GetMapping
     public List<IpAddress> getAll() {
         return repo.findAll();
     }
 
-    // Add new IP address
     @PostMapping
-    public ResponseEntity<IpAddress> add(@RequestParam String location, @RequestParam String ip) {
+    public IpAddress add(@RequestParam String location, @RequestParam String ip) {
         IpAddress addr = new IpAddress();
         addr.setLocation(location);
         addr.setIp(ip);
-        IpAddress saved = repo.save(addr);
-        return ResponseEntity.ok(saved);
+        return repo.save(addr);
     }
 
-    // Delete IP address by id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteIp(@PathVariable Long id) {
         if (!repo.existsById(id)) {
@@ -45,7 +38,6 @@ public class IpAddressController {
         return ResponseEntity.noContent().build();
     }
 
-    // Update IP address by id
     @PutMapping("/{id}")
     public ResponseEntity<IpAddress> updateIp(
             @PathVariable Long id,
@@ -57,8 +49,7 @@ public class IpAddressController {
                     existing.setIp(ip);
                     IpAddress updated = repo.save(existing);
                     return ResponseEntity.ok(updated);
-                })
-                .orElse(ResponseEntity.notFound().build());
+                }).orElse(ResponseEntity.notFound().build());
     }
 
 }

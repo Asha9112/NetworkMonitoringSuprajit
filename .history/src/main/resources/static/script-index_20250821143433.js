@@ -112,7 +112,6 @@ try {
       saveBtn.onclick = async () => {
         const newLoc = locInput.value.trim();
         const newIp = ipInput.value.trim();
-         console.log("Updating record with ID:", item.id);
         if (!newLoc || !newIp) {
           alert("Both Location and IP Address are required.");
           return;
@@ -122,7 +121,7 @@ try {
         formData.append("ip", newIp);
         const updateResponse = await fetchWithAuth(`/api/ip/${item.id}`, {
           method: 'PUT',
-          body: formData.toString(),
+          body: formData.toString()
         });
         if (updateResponse && updateResponse.ok) {
           renderTable();

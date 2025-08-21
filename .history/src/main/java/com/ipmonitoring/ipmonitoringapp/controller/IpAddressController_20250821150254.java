@@ -47,18 +47,18 @@ public class IpAddressController {
 
     // Update IP address by id
     @PutMapping("/{id}")
-    public ResponseEntity<IpAddress> updateIp(
-            @PathVariable Long id,
-            @RequestParam String location,
-            @RequestParam String ip) {
-        return repo.findById(id)
-                .map(existing -> {
-                    existing.setLocation(location);
-                    existing.setIp(ip);
-                    IpAddress updated = repo.save(existing);
-                    return ResponseEntity.ok(updated);
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
+public ResponseEntity<IpAddress> updateIp(
+        @PathVariable Long id,
+        @RequestParam String location,
+        @RequestParam String ip) {
+    return repo.findById(id)
+            .map(existing -> {
+                existing.setLocation(location);
+                existing.setIp(ip);
+                IpAddress updated = repo.save(existing);
+                return ResponseEntity.ok(updated);
+            })
+            .orElse(ResponseEntity.notFound().build());
+}
 
 }

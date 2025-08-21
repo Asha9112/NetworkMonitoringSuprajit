@@ -37,15 +37,7 @@ async function fetchWithAuth(url, options = {}) {
 async function renderTable() {
   const response = await fetchWithAuth('/api/ip');
   if (!response) return;
-  let ipData = [];
-try {
-  ipData = await response.json();
-} catch (error) {
-  console.error("Failed to parse IP data:", error);
-  ipTableBody.innerHTML = `<tr><td colspan="3" style="text-align:center;">Failed to load data</td></tr>`;
-  return;
-}
-
+  const ipData = await response.json();
   ipTableBody.innerHTML = "";
 
   if (ipData.length === 0) {
@@ -112,7 +104,6 @@ try {
       saveBtn.onclick = async () => {
         const newLoc = locInput.value.trim();
         const newIp = ipInput.value.trim();
-         console.log("Updating record with ID:", item.id);
         if (!newLoc || !newIp) {
           alert("Both Location and IP Address are required.");
           return;
