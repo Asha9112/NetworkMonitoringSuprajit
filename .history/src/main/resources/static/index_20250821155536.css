@@ -154,7 +154,7 @@ form button:focus {
     line-height: 1.1;
     height: 22px;
     border: 1px solid #606060;
-    border-radius: 60px;
+    border border-radius: 60;
     text-align: center;
     /* background-color removed to honor status classes in statusTable */
 }
