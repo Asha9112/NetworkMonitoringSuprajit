@@ -26,12 +26,11 @@ public class UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(rawPassword));
-        user.setRole("USER"); // Default to USER role
+        user.setRole("USER");  // Assign default USER role
         return userRepository.save(user);
     }
 
-    public User findByUsername(String username) {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
-        return optionalUser.orElse(null);
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

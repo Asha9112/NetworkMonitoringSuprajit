@@ -33,7 +33,7 @@ public class IpAddressController {
     @PostMapping
     public ResponseEntity<?> add(@RequestParam String location, @RequestParam String ip,
             @RequestParam String username) {
-        User user = userRepository.findByUsername(username).orElse(null);
+        User user = userRepository.findById(username).orElse(null);
         if (user == null || !user.getRole().equals("ADMIN")) {
             return ResponseEntity.status(403).body("Forbidden: Only admin can add IP addresses");
         }
@@ -47,7 +47,7 @@ public class IpAddressController {
     // Delete IP address by id (admin only)
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteIp(@PathVariable Long id, @RequestParam String username) {
-        User user = userRepository.findByUsername(username).orElse(null);
+        User user = userRepository.findById(username).orElse(null);
         if (user == null || !user.getRole().equals("ADMIN")) {
             return ResponseEntity.status(403).body("Forbidden: Only admin can delete IP addresses");
         }
@@ -65,7 +65,7 @@ public class IpAddressController {
             @RequestParam String location,
             @RequestParam String ip,
             @RequestParam String username) {
-        User user = userRepository.findByUsername(username).orElse(null);
+        User user = userRepository.findById(username).orElse(null);
         if (user == null || !user.getRole().equals("ADMIN")) {
             return ResponseEntity.status(403).body("Forbidden: Only admin can update IP addresses");
         }

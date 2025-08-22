@@ -38,13 +38,13 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(username, password));
             if (auth.isAuthenticated()) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
-                // Use UserService to fetch user details with role
-                User user = userService.findByUsername(username);
+                // Fetch user details with role
+                User user = userRepository.findByUsername(username);
 
                 if (user == null) {
                     return ResponseEntity.status(401).body("User not found");
                 }
-                // Return user info with role (exclude password)
+                // Return user info with role (do NOT include password)
                 return ResponseEntity.ok(new LoginResponse(user.getUsername(), user.getRole()));
             }
         } catch (Exception e) {

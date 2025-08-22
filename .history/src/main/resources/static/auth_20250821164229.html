@@ -3,7 +3,6 @@
 <head>
   <title>Signup & Login</title>
   <style>
-    /* Your existing CSS unchanged */
     body { font-family: Arial, sans-serif; background: #f5f5f5; display: flex; justify-content: center; padding-top: 50px; }
     .container { background: white; padding: 30px; box-shadow: 0 0 10px #ccc; width: 350px; border-radius: 8px; }
     h2 { text-align: center; margin-bottom: 20px; }
@@ -48,7 +47,6 @@
       document.getElementById('signup-message').textContent = '';
       document.getElementById('login-message').textContent = '';
     }
-
     async function submitSignup(event) {
       event.preventDefault();
       const username = document.getElementById('signup-username').value.trim();
@@ -76,7 +74,6 @@
         msg.classList.add('error');
       }
     }
-
     async function submitLogin(event) {
       event.preventDefault();
       const username = document.getElementById('login-username').value.trim();
@@ -91,11 +88,9 @@
           body: new URLSearchParams({username, password})
         });
         if (res.ok) {
-          const userData = await res.json(); // Should contain {username, role}
-          sessionStorage.setItem('currentUser', JSON.stringify({
-            username: userData.username,
-            role: userData.role
-          }));
+          const userData = await res.json(); // Expect an object with username, role
+          // Store username and role, do NOT store password
+          sessionStorage.setItem('currentUser', JSON.stringify({username: userData.username, role: userData.role}));
           msg.textContent = 'Login successful! Redirecting...';
           msg.classList.add('success');
           setTimeout(() => { window.location.href = 'status.html'; }, 1000);
